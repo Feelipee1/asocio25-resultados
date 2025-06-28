@@ -1,0 +1,35 @@
+# 🔒 Entorno virtual de Python
+.venv/
+env/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.ipynb_checkpoints
+
+# 📊 Archivos de salida o temporales
+output/
+*.log
+*.tmp
+*.bak
+*.csv
+# *.xlsx
+
+# 🧪 Archivos temporales de Jupyter
+.ipynb_checkpoints/
+.DS_Store
+
+# ⚙️ Configuraciones de IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# 🔐 Tokens, claves o variables de entorno
+.env
+.env.*
+
+# 🚫 Archivos ocultos del sistema operativo
+Thumbs.db
+ehthumbs.db
+Desktop.ini
