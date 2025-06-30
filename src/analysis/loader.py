@@ -72,3 +72,27 @@ if all_assignments:
     
 else:
     print("No se encontraron datos válidos para procesar.")
+
+
+    # Procesar la hoja 'Reuniones' (página 2) de cada archivo y combinar los resultados
+    all_meeting_days = []
+
+    for file_path in file_paths:
+        try:
+            instance_num = file_path.stem.split('_')[0].replace('Instance', '')
+            meeting_days = pd.read_excel(file_path, sheet_name='Reuniones', usecols=['Grupo', 'Dia de Reunion'])
+            meeting_days['Instance'] = instance_num
+            all_meeting_days.append(meeting_days)
+        except Exception as e:
+            print(f"Error procesando hoja 'Reuniones' en {file_path.name}: {str(e)}")
+            continue
+
+    if all_meeting_days:
+        combined_meeting_days = pd.concat(all_meeting_days, ignore_index=True)
+        output_meeting_days_path = os.path.join(folder_path, "combined_meeting_days.xlsx")
+        combined_meeting_days.to_excel(output_meeting_days_path, index=False)
+        print(f"\nCombinación de 'Dia de Reunion' completada. Resultados guardados en: {output_meeting_days_path}")
+        print("\nResumen de reuniones por grupo e instancia:")
+        print(combined_meeting_days.groupby(['Instance', 'Grupo'])['Dia de Reunion'].unique())
+    else:
+        print("No se encontraron datos válidos en la hoja 'Reuniones' para procesar.")
